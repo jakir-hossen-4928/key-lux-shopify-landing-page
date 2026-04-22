@@ -2,7 +2,7 @@
 
 A luxurious, high-converting Shopify landing page built on the high-performance **Ella Theme (v6.7.6)**. Designed for premium brands that demand visual excellence and superior user experience.
 
-![Key Lux Preview](./preview-site.png)
+![Key Lux Preview](preview-site.png)
 
 ## ✨ Features
 
