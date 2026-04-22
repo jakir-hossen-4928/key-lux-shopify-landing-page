@@ -1,0 +1,1110 @@
+{% doc %}
+  @prompt
+    Create a trust badges / service block Liquid section that exactly matches this design system: dark near-black background (HSL 0 0% 4%), subtle bottom border (HSL 0 0% 15%). 4 items in a responsive grid: 2 columns on mobile, 4 columns on desktop (768px+), with gap of 24px and container padding of 40px vertical. Each item uses flexbox row with icon on left and text on right. Icon container: 48x48px, border-radius 12px, background teal at 10% opacity (HSL 170 71% 35% / 0.1), border 1px solid teal at 20% opacity (HSL 170 71% 35% / 0.2), centered flex. Inline SVG icons sized 20x20px in teal color (HSL 170 71% 35%): 1) Truck - label "Free Shipping", sub "Worldwide delivery". 2) ShieldCheck - label "30-Day Guarantee", sub "Risk-free returns". 3) Lock - label "Secure Payment", sub "Encrypted checkout". 4) Sparkles - label "Premium Quality", sub "Built to last". Label text: font-size 14px, font-weight 600, color white (HSL 0 0% 98%). Subtitle text: font-size 12px, color muted gray (HSL 0 0% 65%). No external dependencies. Fully mobile responsive using CSS media queries only., Create a trust badges / service block Liquid section with these exact specs: Dark near-black background (HSL 0 0% 4%), subtle bottom border (HSL 0 0% 15%). Layout: 1 column centered on mobile, 4 columns on desktop (768px+), gap 24px, vertical padding 40px. Each item is centered on mobile (flex-direction column, align-items center, text-align center) and flexbox row on desktop. Icon container: 48x48px, border-radius 12px, background teal at 10% opacity (HSL 170 71% 35% / 0.1), border 1px solid teal at 20% opacity. Inline SVG icons 20x20px in teal (HSL 170 71% 35%): 1) Truck - "Free Shipping" / "Worldwide delivery", 2) ShieldCheck - "30-Day Guarantee" / "Risk-free returns", 3) Lock - "Secure Payment" / "Encrypted checkout", 4) Sparkles - "Premium Quality" / "Built to last". Label: 14px, font-weight 600, white (HSL 0 0% 98%). Subtitle: 12px, muted gray (HSL 0 0% 65%). Add Liquid schema settings so merchant can customize each item's label text and subtitle text from the theme editor sidebar. No external dependencies. Pure Liquid + CSS media queries only., okay i want to in moible left side iocn  and right side text and Ensure that each element within the design incorporates extensive customization options. This includes adjustable parameters such as font size, height, width, image size, and aspect ratio. Additionally, allow for the customization of font color, background color, border style, border radius, and options for image changes. It’s essential that no element is hardcoded; every aspect and class must be dynamic and easily customizable to provide flexibility for users. This approach will enable seamless personalization of each component to fit various design needs., now add badge icon add options and display  these in moible center , i say add icon image options...useer can set image..., for mobile also add sliding feuters..user can enble this feuters form theme editor.. add auto slide withour any arrows or icon.., for mobile also add sliding feuters..user can enble this feuters form theme editor.. add auto slide withour any arrows or icon.., when slider is enble then display the in center not in left side..position must be in center
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-trust-badges-{{ ai_gen_id }} {
+    display: block;
+    background-color: {{ block.settings.background_color }};
+    border-bottom: {{ block.settings.border_width }}px {{ block.settings.border_style }} {{ block.settings.border_color }};
+    padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    width: 100%;
+  }
+
+  .ai-trust-badges__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-trust-badges__wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-trust-badges__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    gap: {{ block.settings.gap_mobile }}px;
+    justify-items: {{ block.settings.justify_items_mobile }};
+  }
+
+  .ai-trust-badges__slider-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap_mobile }}px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: center;
+  }
+
+  .ai-trust-badges__slider-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-trust-badges__slide-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: calc(100% - {{ block.settings.gap_mobile }}px);
+    display: flex;
+    justify-content: center;
+  }
+
+  .ai-trust-badges__item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: row;
+    align-items: {{ block.settings.align_items_mobile }};
+    text-align: {{ block.settings.text_align_mobile }};
+    gap: {{ block.settings.item_gap }}px;
+  }
+
+  .ai-trust-badges__icon-container-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    border-radius: {{ block.settings.icon_border_radius }}px;
+    background-color: {{ block.settings.icon_background_color }};
+    border: {{ block.settings.icon_border_width }}px {{ block.settings.icon_border_style }} {{ block.settings.icon_border_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .ai-trust-badges__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_svg_size }}px;
+    height: {{ block.settings.icon_svg_size }}px;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-trust-badges__icon-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ block.settings.icon_image_fit }};
+  }
+
+  .ai-trust-badges__text-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.text_gap }}px;
+  }
+
+  .ai-trust-badges__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: {{ block.settings.label_font_weight }};
+    color: {{ block.settings.label_color }};
+    margin: 0;
+    line-height: {{ block.settings.label_line_height }};
+  }
+
+  .ai-trust-badges__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_font_size }}px;
+    font-weight: {{ block.settings.subtitle_font_weight }};
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    line-height: {{ block.settings.subtitle_line_height }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .ai-trust-badges__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+      gap: {{ block.settings.gap_desktop }}px;
+      justify-items: {{ block.settings.justify_items_desktop }};
+    }
+
+    .ai-trust-badges__item-{{ ai_gen_id }} {
+      flex-direction: {{ block.settings.flex_direction_desktop }};
+      align-items: {{ block.settings.align_items_desktop }};
+      text-align: {{ block.settings.text_align_desktop }};
+    }
+  }
+{% endstyle %}
+
+<trust-badges-{{ ai_gen_id }} class="ai-trust-badges-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-trust-badges__container-{{ ai_gen_id }}">
+    <div class="ai-trust-badges__wrapper-{{ ai_gen_id }}">
+      {% if block.settings.enable_mobile_slider %}
+        <div class="ai-trust-badges__slider-{{ ai_gen_id }}" data-slider>
+          {% for i in (1..4) %}
+            {% liquid
+              assign badge_num = 'badge_' | append: i
+              assign custom_image_key = badge_num | append: '_custom_image'
+              assign icon_key = badge_num | append: '_icon'
+              assign label_key = badge_num | append: '_label'
+              assign subtitle_key = badge_num | append: '_subtitle'
+              
+              assign custom_image = block.settings[custom_image_key]
+              assign icon = block.settings[icon_key]
+              assign label = block.settings[label_key]
+              assign subtitle = block.settings[subtitle_key]
+            %}
+            <div class="ai-trust-badges__slide-{{ ai_gen_id }}">
+              <div class="ai-trust-badges__item-{{ ai_gen_id }}">
+                <div class="ai-trust-badges__icon-container-{{ ai_gen_id }}">
+                  {% if custom_image %}
+                    <img
+                      src="{{ custom_image | image_url: width: 200 }}"
+                      alt="{{ label | escape }}"
+                      class="ai-trust-badges__icon-image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="{{ block.settings.icon_size }}"
+                      height="{{ block.settings.icon_size }}"
+                    >
+                  {% elsif icon == 'truck' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                      <path d="M15 18H9"></path>
+                      <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                      <circle cx="17" cy="18" r="2"></circle>
+                      <circle cx="7" cy="18" r="2"></circle>
+                    </svg>
+                  {% elsif icon == 'shield' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                  {% elsif icon == 'lock' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  {% elsif icon == 'sparkles' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                      <path d="M5 3v4"></path>
+                      <path d="M19 17v4"></path>
+                      <path d="M3 5h4"></path>
+                      <path d="M17 19h4"></path>
+                    </svg>
+                  {% elsif icon == 'star' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  {% elsif icon == 'heart' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                  {% elsif icon == 'check' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  {% elsif icon == 'gift' %}
+                    <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                      <rect x="2" y="7" width="20" height="5"></rect>
+                      <line x1="12" y1="22" x2="12" y2="7"></line>
+                      <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                      <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                    </svg>
+                  {% endif %}
+                </div>
+                <div class="ai-trust-badges__text-{{ ai_gen_id }}">
+                  <p class="ai-trust-badges__label-{{ ai_gen_id }}">{{ label }}</p>
+                  <p class="ai-trust-badges__subtitle-{{ ai_gen_id }}">{{ subtitle }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="ai-trust-badges__grid-{{ ai_gen_id }}">
+          {% for i in (1..4) %}
+            {% liquid
+              assign badge_num = 'badge_' | append: i
+              assign custom_image_key = badge_num | append: '_custom_image'
+              assign icon_key = badge_num | append: '_icon'
+              assign label_key = badge_num | append: '_label'
+              assign subtitle_key = badge_num | append: '_subtitle'
+              
+              assign custom_image = block.settings[custom_image_key]
+              assign icon = block.settings[icon_key]
+              assign label = block.settings[label_key]
+              assign subtitle = block.settings[subtitle_key]
+            %}
+            <div class="ai-trust-badges__item-{{ ai_gen_id }}">
+              <div class="ai-trust-badges__icon-container-{{ ai_gen_id }}">
+                {% if custom_image %}
+                  <img
+                    src="{{ custom_image | image_url: width: 200 }}"
+                    alt="{{ label | escape }}"
+                    class="ai-trust-badges__icon-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="{{ block.settings.icon_size }}"
+                    height="{{ block.settings.icon_size }}"
+                  >
+                {% elsif icon == 'truck' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                    <path d="M15 18H9"></path>
+                    <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                    <circle cx="17" cy="18" r="2"></circle>
+                    <circle cx="7" cy="18" r="2"></circle>
+                  </svg>
+                {% elsif icon == 'shield' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                {% elsif icon == 'lock' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                {% elsif icon == 'sparkles' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                    <path d="M5 3v4"></path>
+                    <path d="M19 17v4"></path>
+                    <path d="M3 5h4"></path>
+                    <path d="M17 19h4"></path>
+                  </svg>
+                {% elsif icon == 'star' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                {% elsif icon == 'heart' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                {% elsif icon == 'check' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                {% elsif icon == 'gift' %}
+                  <svg class="ai-trust-badges__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                    <rect x="2" y="7" width="20" height="5"></rect>
+                    <line x1="12" y1="22" x2="12" y2="7"></line>
+                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                  </svg>
+                {% endif %}
+              </div>
+              <div class="ai-trust-badges__text-{{ ai_gen_id }}">
+                <p class="ai-trust-badges__label-{{ ai_gen_id }}">{{ label }}</p>
+                <p class="ai-trust-badges__subtitle-{{ ai_gen_id }}">{{ subtitle }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</trust-badges-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TrustBadges{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.slider = null;
+        this.autoSlideInterval = null;
+        this.currentIndex = 0;
+      }
+
+      connectedCallback() {
+        this.slider = this.querySelector('[data-slider]');
+        
+        if (this.slider && window.innerWidth < 768) {
+          this.startAutoSlide();
+        }
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth < 768 && this.slider && !this.autoSlideInterval) {
+            this.startAutoSlide();
+          } else if (window.innerWidth >= 768 && this.autoSlideInterval) {
+            this.stopAutoSlide();
+          }
+        });
+      }
+
+      startAutoSlide() {
+        if (!this.slider) return;
+        
+        const slides = this.slider.querySelectorAll('.ai-trust-badges__slide-{{ ai_gen_id }}');
+        if (slides.length === 0) return;
+
+        this.autoSlideInterval = setInterval(() => {
+          this.currentIndex = (this.currentIndex + 1) % slides.length;
+          const slideWidth = slides[0].offsetWidth + {{ block.settings.gap_mobile }};
+          this.slider.scrollTo({
+            left: slideWidth * this.currentIndex,
+            behavior: 'smooth'
+          });
+        }, {{ block.settings.auto_slide_interval | times: 1000 }});
+      }
+
+      stopAutoSlide() {
+        if (this.autoSlideInterval) {
+          clearInterval(this.autoSlideInterval);
+          this.autoSlideInterval = null;
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoSlide();
+      }
+    }
+
+    customElements.define('trust-badges-{{ ai_gen_id }}', TrustBadges{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Trust badges",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Container settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "label": "Max width",
+      "min": 600,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Border settings"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#262626"
+    },
+    {
+      "type": "header",
+      "content": "Mobile slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_slider",
+      "label": "Enable mobile slider",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "auto_slide_interval",
+      "label": "Auto slide interval",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Layout - Mobile"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Gap",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "justify_items_mobile",
+      "label": "Justify items",
+      "options": [
+        {
+          "value": "start",
+          "label": "Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "End"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "align_items_mobile",
+      "label": "Align items",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Layout - Desktop"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Gap",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "justify_items_desktop",
+      "label": "Justify items",
+      "options": [
+        {
+          "value": "start",
+          "label": "Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "End"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "select",
+      "id": "flex_direction_desktop",
+      "label": "Direction",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "select",
+      "id": "align_items_desktop",
+      "label": "Align items",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Item spacing"
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Icon to text gap",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_gap",
+      "label": "Label to subtitle gap",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Icon container"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Size",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "icon_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "icon_background_color",
+      "label": "Background color",
+      "default": "#1a4d47"
+    },
+    {
+      "type": "range",
+      "id": "icon_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "icon_border_style",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "icon_border_color",
+      "label": "Border color",
+      "default": "#2d7a70"
+    },
+    {
+      "type": "header",
+      "content": "Icon SVG"
+    },
+    {
+      "type": "range",
+      "id": "icon_svg_size",
+      "label": "SVG size",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#3da89a"
+    },
+    {
+      "type": "header",
+      "content": "Icon image"
+    },
+    {
+      "type": "select",
+      "id": "icon_image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Label text"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "label_font_weight",
+      "label": "Font weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "label_line_height",
+      "label": "Line height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.4
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "header",
+      "content": "Subtitle text"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size",
+      "label": "Font size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_weight",
+      "label": "Font weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "subtitle_line_height",
+      "label": "Line height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.4
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color",
+      "default": "#a6a6a6"
+    },
+    {
+      "type": "header",
+      "content": "Badge 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_1_custom_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "select",
+      "id": "badge_1_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "truck"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_label",
+      "label": "Label",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_subtitle",
+      "label": "Subtitle",
+      "default": "Worldwide delivery"
+    },
+    {
+      "type": "header",
+      "content": "Badge 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_2_custom_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "select",
+      "id": "badge_2_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "shield"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_label",
+      "label": "Label",
+      "default": "30-Day Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_subtitle",
+      "label": "Subtitle",
+      "default": "Risk-free returns"
+    },
+    {
+      "type": "header",
+      "content": "Badge 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_3_custom_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "select",
+      "id": "badge_3_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "lock"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_label",
+      "label": "Label",
+      "default": "Secure Payment"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_subtitle",
+      "label": "Subtitle",
+      "default": "Encrypted checkout"
+    },
+    {
+      "type": "header",
+      "content": "Badge 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_4_custom_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "select",
+      "id": "badge_4_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "sparkles"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_label",
+      "label": "Label",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_subtitle",
+      "label": "Subtitle",
+      "default": "Built to last"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust badges"
+    }
+  ]
+}
+{% endschema %}

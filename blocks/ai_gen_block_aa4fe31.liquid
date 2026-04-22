@@ -1,0 +1,1561 @@
+{% doc %}
+  @prompt
+    create  review section based on this code import { Star } from "lucide-react";
+    
+    const reviews = [
+      { name: "Marcus T.", rating: 5, text: "Feels like a luxury upgrade 🔥. Fits my BMW key perfectly and looks stunning." },
+      { name: "Sophia L.", rating: 5, text: "The build quality is unreal. Way better than the $20 ones I tried before." },
+      { name: "Daniel R.", rating: 5, text: "Compliments every time someone sees it. Worth every penny." },
+      { name: "Aisha K.", rating: 5, text: "Survived a coffee spill and a drop in the parking lot. Still flawless." },
+      { name: "James P.", rating: 5, text: "Premium feel, premium look. My Audi finally has a key worthy of it." },
+    ];
+    
+    const Reviews = () => {
+      return (
+        <section className="py-24 border-b border-border">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <div className="text-xs uppercase tracking-widest text-primary mb-3">Reviews</div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight">Loved by 10,000+ drivers</h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {reviews.slice(0, 3).map((r) => (
+                <ReviewCard key={r.name} {...r} />
+              ))}
+            </div>
+            <div className="grid md:grid-cols-2 gap-6 mt-6 max-w-4xl mx-auto">
+              {reviews.slice(3).map((r) => (
+                <ReviewCard key={r.name} {...r} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+    
+    const ReviewCard = ({ name, rating, text }: { name: string; rating: number; text: string }) => (
+      <div className="rounded-2xl border border-border bg-card p-6 hover:border-primary/40 transition-colors">
+        <div className="flex gap-0.5 mb-3">
+          {Array.from({ length: rating }).map((_, i) => (
+            <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+          ))}
+        </div>
+        <p className="text-foreground mb-4 leading-relaxed">"{text}"</p>
+        <div className="text-sm text-muted-foreground font-medium">— {name}</div>
+      </div>
+    );
+    
+    export default Reviews;@tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    
+    /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+    All colors MUST be HSL.
+    */
+    
+    @layer base {
+      :root {
+        /* Premium dark automotive theme */
+        --background: 0 0% 4%;
+        --foreground: 0 0% 98%;
+    
+        --card: 0 0% 7%;
+        --card-foreground: 0 0% 98%;
+    
+        --popover: 0 0% 7%;
+        --popover-foreground: 0 0% 98%;
+    
+        --primary: 170 71% 35%;
+        --primary-foreground: 0 0% 100%;
+        --primary-glow: 170 71% 45%;
+    
+        --secondary: 0 0% 12%;
+        --secondary-foreground: 0 0% 98%;
+    
+        --muted: 0 0% 12%;
+        --muted-foreground: 0 0% 65%;
+    
+        --accent: 170 71% 35%;
+        --accent-foreground: 0 0% 100%;
+    
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+    
+        --border: 0 0% 15%;
+        --input: 0 0% 15%;
+        --ring: 170 71% 35%;
+    
+        --radius: 0.75rem;
+    
+        --gradient-primary: linear-gradient(135deg, hsl(170 71% 35%), hsl(170 71% 45%));
+        --gradient-dark: linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 7%));
+        --gradient-radial: radial-gradient(circle at center, hsl(170 71% 35% / 0.25), transparent 70%);
+        --shadow-glow: 0 0 80px hsl(170 71% 35% / 0.4);
+        --shadow-elegant: 0 20px 60px -20px hsl(0 0% 0% / 0.6);
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+        --sidebar-background: 0 0% 98%;
+    
+        --sidebar-foreground: 240 5.3% 26.1%;
+    
+        --sidebar-primary: 240 5.9% 10%;
+    
+        --sidebar-primary-foreground: 0 0% 98%;
+    
+        --sidebar-accent: 240 4.8% 95.9%;
+    
+        --sidebar-accent-foreground: 240 5.9% 10%;
+    
+        --sidebar-border: 220 13% 91%;
+    
+        --sidebar-ring: 217.2 91.2% 59.8%;
+      }
+    
+      .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+    
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+    
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+    
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+    
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+    
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+    
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+    
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+    
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212.7 26.8% 83.9%;
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+      }
+    }
+    
+    @layer base {
+      * {
+        @apply border-border;
+      }
+    
+      body {
+        @apply bg-background text-foreground;
+      }
+    }
+    make this same to same this image , Ensure that each element within the design incorporates extensive customization options. This includes adjustable parameters such as font size, height, width, image size, and aspect ratio. Additionally, allow for the customization of font color, background color, border style, border radius, and options for image changes. It’s essential that no element is hardcoded; every aspect and class must be dynamic and easily customizable to provide flexibility for users. This approach will enable seamless personalization of each component to fit various design needs.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-reviews-section-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding_top }}px {{ block.settings.section_padding_left_right }}px {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+    border-bottom: {{ block.settings.border_bottom_width }}px {{ block.settings.border_bottom_style }} {{ block.settings.border_bottom_color }};
+    border-top: {{ block.settings.border_top_width }}px {{ block.settings.border_top_style }} {{ block.settings.border_top_color }};
+  }
+
+  .ai-reviews-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_max_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ block.settings.container_padding_left_right }}px;
+  }
+
+  .ai-reviews-header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.header_text_align }};
+    max-width: {{ block.settings.header_max_width }}px;
+    margin: 0 auto {{ block.settings.header_margin_bottom }}px;
+    padding: {{ block.settings.header_padding_top }}px {{ block.settings.header_padding_left_right }}px {{ block.settings.header_padding_bottom }}px;
+    background-color: {{ block.settings.header_background_color }};
+    border-radius: {{ block.settings.header_border_radius }}px;
+  }
+
+  .ai-reviews-eyebrow-{{ ai_gen_id }} {
+    font-size: {{ block.settings.eyebrow_font_size }}px;
+    text-transform: {{ block.settings.eyebrow_text_transform }};
+    letter-spacing: {{ block.settings.eyebrow_letter_spacing }};
+    color: {{ block.settings.eyebrow_color }};
+    margin-bottom: {{ block.settings.eyebrow_margin_bottom }}px;
+    font-weight: {{ block.settings.eyebrow_font_weight }};
+    line-height: {{ block.settings.eyebrow_line_height }};
+  }
+
+  .ai-reviews-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: {{ block.settings.title_font_weight }};
+    line-height: {{ block.settings.title_line_height }};
+    letter-spacing: {{ block.settings.title_letter_spacing }};
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    text-transform: {{ block.settings.title_text_transform }};
+  }
+
+  .ai-reviews-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.grid_columns_desktop }}, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+    margin-bottom: {{ block.settings.grid_margin_bottom }}px;
+  }
+
+  .ai-reviews-grid-bottom-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.grid_bottom_columns_desktop }}, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+    max-width: {{ block.settings.grid_bottom_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-review-card-{{ ai_gen_id }} {
+    border-radius: {{ block.settings.card_border_radius }}px;
+    border: {{ block.settings.card_border_width }}px {{ block.settings.card_border_style }} {{ block.settings.card_border_color }};
+    background-color: {{ block.settings.card_background_color }};
+    padding: {{ block.settings.card_padding_top }}px {{ block.settings.card_padding_left_right }}px {{ block.settings.card_padding_bottom }}px;
+    transition: all {{ block.settings.card_transition_duration }}s ease;
+    box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px {{ block.settings.card_shadow_blur }}px {{ block.settings.card_shadow_color }};
+    min-height: {{ block.settings.card_min_height }}px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-review-card-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.card_border_hover_color }};
+    background-color: {{ block.settings.card_background_hover_color }};
+    transform: translateY({{ block.settings.card_hover_translate_y }}px);
+    box-shadow: {{ block.settings.card_hover_shadow_x }}px {{ block.settings.card_hover_shadow_y }}px {{ block.settings.card_hover_shadow_blur }}px {{ block.settings.card_hover_shadow_color }};
+  }
+
+  .ai-review-stars-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.star_gap }}px;
+    margin-bottom: {{ block.settings.stars_margin_bottom }}px;
+    justify-content: {{ block.settings.stars_alignment }};
+  }
+
+  .ai-review-star-{{ ai_gen_id }} {
+    width: {{ block.settings.star_size }}px;
+    height: {{ block.settings.star_size }}px;
+    fill: {{ block.settings.star_fill_color }};
+    color: {{ block.settings.star_stroke_color }};
+    stroke-width: {{ block.settings.star_stroke_width }};
+  }
+
+  .ai-review-text-{{ ai_gen_id }} {
+    color: {{ block.settings.review_text_color }};
+    margin-bottom: {{ block.settings.review_text_margin_bottom }}px;
+    line-height: {{ block.settings.review_text_line_height }};
+    font-size: {{ block.settings.review_text_font_size }}px;
+    font-weight: {{ block.settings.review_text_font_weight }};
+    letter-spacing: {{ block.settings.review_text_letter_spacing }};
+    text-align: {{ block.settings.review_text_align }};
+    flex-grow: 1;
+  }
+
+  .ai-review-author-{{ ai_gen_id }} {
+    font-size: {{ block.settings.author_font_size }}px;
+    color: {{ block.settings.author_color }};
+    font-weight: {{ block.settings.author_font_weight }};
+    line-height: {{ block.settings.author_line_height }};
+    letter-spacing: {{ block.settings.author_letter_spacing }};
+    text-align: {{ block.settings.author_text_align }};
+    text-transform: {{ block.settings.author_text_transform }};
+    margin-top: {{ block.settings.author_margin_top }}px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-reviews-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.grid_columns_tablet }}, 1fr);
+    }
+
+    .ai-reviews-grid-bottom-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.grid_bottom_columns_tablet }}, 1fr);
+    }
+
+    .ai-reviews-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size_tablet }}px;
+    }
+
+    .ai-reviews-eyebrow-{{ ai_gen_id }} {
+      font-size: {{ block.settings.eyebrow_font_size_tablet }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reviews-section-{{ ai_gen_id }} {
+      width: 100%;
+      padding: {{ block.settings.section_padding_top_mobile }}px {{ block.settings.section_padding_left_right_mobile }}px {{ block.settings.section_padding_bottom_mobile }}px;
+    }
+
+    .ai-reviews-grid-{{ ai_gen_id }},
+    .ai-reviews-grid-bottom-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.grid_columns_mobile }}, 1fr);
+    }
+
+    .ai-reviews-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size_mobile }}px;
+    }
+
+    .ai-reviews-eyebrow-{{ ai_gen_id }} {
+      font-size: {{ block.settings.eyebrow_font_size_mobile }}px;
+    }
+
+    .ai-review-card-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding_top_mobile }}px {{ block.settings.card_padding_left_right_mobile }}px {{ block.settings.card_padding_bottom_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<reviews-section-{{ ai_gen_id }} class="ai-reviews-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-reviews-container-{{ ai_gen_id }}">
+    <div class="ai-reviews-header-{{ ai_gen_id }}">
+      {% if block.settings.eyebrow_text != blank %}
+        <div class="ai-reviews-eyebrow-{{ ai_gen_id }}">{{ block.settings.eyebrow_text }}</div>
+      {% endif %}
+      {% if block.settings.title != blank %}
+        <h2 class="ai-reviews-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="ai-reviews-grid-{{ ai_gen_id }}">
+      {% if block.settings.review_1_enabled %}
+        <div class="ai-review-card-{{ ai_gen_id }}">
+          <div class="ai-review-stars-{{ ai_gen_id }}">
+            {% for i in (1..block.settings.review_1_rating) %}
+              <svg class="ai-review-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {% endfor %}
+          </div>
+          {% if block.settings.review_1_text != blank %}
+            <p class="ai-review-text-{{ ai_gen_id }}">"{{ block.settings.review_1_text }}"</p>
+          {% endif %}
+          {% if block.settings.review_1_author != blank %}
+            <div class="ai-review-author-{{ ai_gen_id }}">— {{ block.settings.review_1_author }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.review_2_enabled %}
+        <div class="ai-review-card-{{ ai_gen_id }}">
+          <div class="ai-review-stars-{{ ai_gen_id }}">
+            {% for i in (1..block.settings.review_2_rating) %}
+              <svg class="ai-review-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {% endfor %}
+          </div>
+          {% if block.settings.review_2_text != blank %}
+            <p class="ai-review-text-{{ ai_gen_id }}">"{{ block.settings.review_2_text }}"</p>
+          {% endif %}
+          {% if block.settings.review_2_author != blank %}
+            <div class="ai-review-author-{{ ai_gen_id }}">— {{ block.settings.review_2_author }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.review_3_enabled %}
+        <div class="ai-review-card-{{ ai_gen_id }}">
+          <div class="ai-review-stars-{{ ai_gen_id }}">
+            {% for i in (1..block.settings.review_3_rating) %}
+              <svg class="ai-review-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {% endfor %}
+          </div>
+          {% if block.settings.review_3_text != blank %}
+            <p class="ai-review-text-{{ ai_gen_id }}">"{{ block.settings.review_3_text }}"</p>
+          {% endif %}
+          {% if block.settings.review_3_author != blank %}
+            <div class="ai-review-author-{{ ai_gen_id }}">— {{ block.settings.review_3_author }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-reviews-grid-bottom-{{ ai_gen_id }}">
+      {% if block.settings.review_4_enabled %}
+        <div class="ai-review-card-{{ ai_gen_id }}">
+          <div class="ai-review-stars-{{ ai_gen_id }}">
+            {% for i in (1..block.settings.review_4_rating) %}
+              <svg class="ai-review-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {% endfor %}
+          </div>
+          {% if block.settings.review_4_text != blank %}
+            <p class="ai-review-text-{{ ai_gen_id }}">"{{ block.settings.review_4_text }}"</p>
+          {% endif %}
+          {% if block.settings.review_4_author != blank %}
+            <div class="ai-review-author-{{ ai_gen_id }}">— {{ block.settings.review_4_author }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.review_5_enabled %}
+        <div class="ai-review-card-{{ ai_gen_id }}">
+          <div class="ai-review-stars-{{ ai_gen_id }}">
+            {% for i in (1..block.settings.review_5_rating) %}
+              <svg class="ai-review-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {% endfor %}
+          </div>
+          {% if block.settings.review_5_text != blank %}
+            <p class="ai-review-text-{{ ai_gen_id }}">"{{ block.settings.review_5_text }}"</p>
+          {% endif %}
+          {% if block.settings.review_5_author != blank %}
+            <div class="ai-review-author-{{ ai_gen_id }}">— {{ block.settings.review_5_author }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</reviews-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ReviewsSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('reviews-section-{{ ai_gen_id }}', ReviewsSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Customer reviews",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "label": "Container max width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "container_padding_left_right",
+      "label": "Container padding left/right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 95
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 95
+    },
+    {
+      "type": "range",
+      "id": "section_padding_left_right",
+      "label": "Padding left/right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_left_right_mobile",
+      "label": "Padding left/right (mobile)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Section borders"
+    },
+    {
+      "type": "range",
+      "id": "border_bottom_width",
+      "label": "Bottom border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "border_bottom_style",
+      "label": "Bottom border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" },
+        { "value": "dotted", "label": "Dotted" },
+        { "value": "double", "label": "Double" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "border_bottom_color",
+      "label": "Bottom border color",
+      "default": "#262626"
+    },
+    {
+      "type": "range",
+      "id": "border_top_width",
+      "label": "Top border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border_top_style",
+      "label": "Top border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" },
+        { "value": "dotted", "label": "Dotted" },
+        { "value": "double", "label": "Double" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "border_top_color",
+      "label": "Top border color",
+      "default": "#262626"
+    },
+    {
+      "type": "header",
+      "content": "Header container"
+    },
+    {
+      "type": "select",
+      "id": "header_text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_max_width",
+      "label": "Max width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "header_margin_bottom",
+      "label": "Margin bottom",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 65
+    },
+    {
+      "type": "range",
+      "id": "header_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "header_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "header_padding_left_right",
+      "label": "Padding left/right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Background color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "header_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Text",
+      "default": "Reviews"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Font size",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_tablet",
+      "label": "Font size (tablet)",
+      "min": 8,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Font size (mobile)",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_letter_spacing",
+      "label": "Letter spacing",
+      "default": "0.15em"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_line_height",
+      "label": "Line height",
+      "default": "1.5"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_text_transform",
+      "label": "Text transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "lowercase", "label": "Lowercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Color",
+      "default": "#2d9d8f"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Text",
+      "default": "Loved by 10,000+ drivers"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Font size",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_tablet",
+      "label": "Font size (tablet)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Font size (mobile)",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "900"
+    },
+    {
+      "type": "text",
+      "id": "title_letter_spacing",
+      "label": "Letter spacing",
+      "default": "-0.02em"
+    },
+    {
+      "type": "text",
+      "id": "title_line_height",
+      "label": "Line height",
+      "default": "1.1"
+    },
+    {
+      "type": "select",
+      "id": "title_text_transform",
+      "label": "Text transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "lowercase", "label": "Lowercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "range",
+      "id": "grid_columns_desktop",
+      "label": "Columns (desktop)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "grid_columns_tablet",
+      "label": "Columns (tablet)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_mobile",
+      "label": "Columns (mobile)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_bottom_columns_desktop",
+      "label": "Bottom grid columns (desktop)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "grid_bottom_columns_tablet",
+      "label": "Bottom grid columns (tablet)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "grid_bottom_max_width",
+      "label": "Bottom grid max width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 5,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "grid_margin_bottom",
+      "label": "Grid margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Review card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "card_border_style",
+      "label": "Border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" },
+        { "value": "dotted", "label": "Dotted" },
+        { "value": "double", "label": "Double" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#262626"
+    },
+    {
+      "type": "color",
+      "id": "card_border_hover_color",
+      "label": "Border hover color",
+      "default": "#2d9d8f66"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Background color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "card_background_hover_color",
+      "label": "Background hover color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "card_min_height",
+      "label": "Min height",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Card spacing"
+    },
+    {
+      "type": "range",
+      "id": "card_padding_top",
+      "label": "Padding top",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_bottom",
+      "label": "Padding bottom",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_left_right",
+      "label": "Padding left/right",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_padding_left_right_mobile",
+      "label": "Padding left/right (mobile)",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Card shadow"
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_x",
+      "label": "Shadow X offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_y",
+      "label": "Shadow Y offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "card_shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "type": "header",
+      "content": "Card hover effects"
+    },
+    {
+      "type": "range",
+      "id": "card_transition_duration",
+      "label": "Transition duration",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3
+    },
+    {
+      "type": "range",
+      "id": "card_hover_translate_y",
+      "label": "Hover translate Y",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_hover_shadow_x",
+      "label": "Hover shadow X offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_hover_shadow_y",
+      "label": "Hover shadow Y offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_hover_shadow_blur",
+      "label": "Hover shadow blur",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "card_hover_shadow_color",
+      "label": "Hover shadow color",
+      "default": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "type": "header",
+      "content": "Star rating"
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "star_gap",
+      "label": "Star gap",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "star_fill_color",
+      "label": "Star fill color",
+      "default": "#2d9d8f"
+    },
+    {
+      "type": "color",
+      "id": "star_stroke_color",
+      "label": "Star stroke color",
+      "default": "#2d9d8f"
+    },
+    {
+      "type": "range",
+      "id": "star_stroke_width",
+      "label": "Star stroke width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "stars_alignment",
+      "label": "Stars alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "stars_margin_bottom",
+      "label": "Stars margin bottom",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Review text"
+    },
+    {
+      "type": "range",
+      "id": "review_text_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "review_text_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "text",
+      "id": "review_text_line_height",
+      "label": "Line height",
+      "default": "1.6"
+    },
+    {
+      "type": "text",
+      "id": "review_text_letter_spacing",
+      "label": "Letter spacing",
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "review_text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "review_text_color",
+      "label": "Text color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "range",
+      "id": "review_text_margin_bottom",
+      "label": "Margin bottom",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Author"
+    },
+    {
+      "type": "range",
+      "id": "author_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "author_font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "text",
+      "id": "author_line_height",
+      "label": "Line height",
+      "default": "1.5"
+    },
+    {
+      "type": "text",
+      "id": "author_letter_spacing",
+      "label": "Letter spacing",
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "author_text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "author_text_transform",
+      "label": "Text transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "lowercase", "label": "Lowercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Text color",
+      "default": "#a3a3a3"
+    },
+    {
+      "type": "range",
+      "id": "author_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Review 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "review_1_enabled",
+      "label": "Enable review 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_1_author",
+      "label": "Author name",
+      "default": "Marcus T."
+    },
+    {
+      "type": "range",
+      "id": "review_1_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_1_text",
+      "label": "Review text",
+      "default": "Feels like a luxury upgrade 🔥. Fits my BMW key perfectly and looks stunning."
+    },
+    {
+      "type": "header",
+      "content": "Review 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "review_2_enabled",
+      "label": "Enable review 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_2_author",
+      "label": "Author name",
+      "default": "Sophia L."
+    },
+    {
+      "type": "range",
+      "id": "review_2_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_2_text",
+      "label": "Review text",
+      "default": "The build quality is unreal. Way better than the $20 ones I tried before."
+    },
+    {
+      "type": "header",
+      "content": "Review 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "review_3_enabled",
+      "label": "Enable review 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_3_author",
+      "label": "Author name",
+      "default": "Daniel R."
+    },
+    {
+      "type": "range",
+      "id": "review_3_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_3_text",
+      "label": "Review text",
+      "default": "Compliments every time someone sees it. Worth every penny."
+    },
+    {
+      "type": "header",
+      "content": "Review 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "review_4_enabled",
+      "label": "Enable review 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_4_author",
+      "label": "Author name",
+      "default": "Aisha K."
+    },
+    {
+      "type": "range",
+      "id": "review_4_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_4_text",
+      "label": "Review text",
+      "default": "Survived a coffee spill and a drop in the parking lot. Still flawless."
+    },
+    {
+      "type": "header",
+      "content": "Review 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "review_5_enabled",
+      "label": "Enable review 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_5_author",
+      "label": "Author name",
+      "default": "James P."
+    },
+    {
+      "type": "range",
+      "id": "review_5_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_5_text",
+      "label": "Review text",
+      "default": "Premium feel, premium look. My Audi finally has a key worthy of it."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer reviews"
+    }
+  ]
+}
+{% endschema %}

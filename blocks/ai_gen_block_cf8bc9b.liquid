@@ -1,0 +1,924 @@
+{% doc %}
+  @prompt
+    create a section of feutersa .import { Fingerprint, Droplets, Shield, KeyRound } from "lucide-react";
+    
+    const features = [
+      { icon: Fingerprint, title: "Secure Fit", desc: "Precision-molded to grip your key perfectly with zero rattle." },
+      { icon: Droplets, title: "Water Resistant", desc: "IPX5 rated. Weather, sweat, or spills — fully protected." },
+      { icon: Shield, title: "Scratch Proof", desc: "Aerospace-grade coating keeps it pristine, year after year." },
+      { icon: KeyRound, title: "Universal Fit", desc: "Compatible with all major car brands and key models." },
+    ];
+    
+    const Features = () => {
+      return (
+        <section className="py-24 border-b border-border">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <div className="text-xs uppercase tracking-widest text-primary mb-3">Features</div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight">Built without compromise</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map(({ icon: Icon, title, desc }) => (
+                <div key={title} className="group rounded-2xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-glow transition-all duration-300">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                    <Icon className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+    
+    export default Features;@tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    
+    /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+    All colors MUST be HSL.
+    */
+    
+    @layer base {
+      :root {
+        /* Premium dark automotive theme */
+        --background: 0 0% 4%;
+        --foreground: 0 0% 98%;
+    
+        --card: 0 0% 7%;
+        --card-foreground: 0 0% 98%;
+    
+        --popover: 0 0% 7%;
+        --popover-foreground: 0 0% 98%;
+    
+        --primary: 170 71% 35%;
+        --primary-foreground: 0 0% 100%;
+        --primary-glow: 170 71% 45%;
+    
+        --secondary: 0 0% 12%;
+        --secondary-foreground: 0 0% 98%;
+    
+        --muted: 0 0% 12%;
+        --muted-foreground: 0 0% 65%;
+    
+        --accent: 170 71% 35%;
+        --accent-foreground: 0 0% 100%;
+    
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+    
+        --border: 0 0% 15%;
+        --input: 0 0% 15%;
+        --ring: 170 71% 35%;
+    
+        --radius: 0.75rem;
+    
+        --gradient-primary: linear-gradient(135deg, hsl(170 71% 35%), hsl(170 71% 45%));
+        --gradient-dark: linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 7%));
+        --gradient-radial: radial-gradient(circle at center, hsl(170 71% 35% / 0.25), transparent 70%);
+        --shadow-glow: 0 0 80px hsl(170 71% 35% / 0.4);
+        --shadow-elegant: 0 20px 60px -20px hsl(0 0% 0% / 0.6);
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+        --sidebar-background: 0 0% 98%;
+    
+        --sidebar-foreground: 240 5.3% 26.1%;
+    
+        --sidebar-primary: 240 5.9% 10%;
+    
+        --sidebar-primary-foreground: 0 0% 98%;
+    
+        --sidebar-accent: 240 4.8% 95.9%;
+    
+        --sidebar-accent-foreground: 240 5.9% 10%;
+    
+        --sidebar-border: 220 13% 91%;
+    
+        --sidebar-ring: 217.2 91.2% 59.8%;
+      }
+    
+      .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+    
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+    
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+    
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+    
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+    
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+    
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+    
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+    
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212.7 26.8% 83.9%;
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+      }
+    }
+    
+    @layer base {
+      * {
+        @apply border-border;
+      }
+    
+      body {
+        @apply bg-background text-foreground;
+      }
+    }
+    Ensure that each element within the design incorporates extensive customization options. This includes adjustable parameters such as font size, height, width, image size, and aspect ratio. Additionally, allow for the customization of font color, background color, border style, border radius, and options for image changes. and for icon add customize image add options..
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-features-section-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+    border-bottom: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-features-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-features-header-{{ ai_gen_id }} {
+    text-align: center;
+    max-width: {{ block.settings.header_max_width }}px;
+    margin: 0 auto {{ block.settings.header_margin_bottom }}px;
+  }
+
+  .ai-features-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    text-transform: uppercase;
+    letter-spacing: {{ block.settings.label_letter_spacing }}em;
+    color: {{ block.settings.label_color }};
+    margin-bottom: {{ block.settings.label_margin_bottom }}px;
+    font-weight: {{ block.settings.label_font_weight }};
+  }
+
+  .ai-features-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_font_size }}px;
+    font-weight: {{ block.settings.heading_font_weight }};
+    line-height: {{ block.settings.heading_line_height }};
+    letter-spacing: {{ block.settings.heading_letter_spacing }}em;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+  }
+
+  .ai-features-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-features-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    }
+
+    .ai-features-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_font_size_desktop }}px;
+    }
+  }
+
+  .ai-features-card-{{ ai_gen_id }} {
+    border-radius: {{ block.settings.card_border_radius }}px;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    background-color: {{ block.settings.card_background_color }};
+    padding: {{ block.settings.card_padding }}px;
+    transition: all 0.3s ease;
+  }
+
+  .ai-features-card-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.card_border_hover_color }};
+    box-shadow: 0 0 {{ block.settings.card_hover_glow_size }}px {{ block.settings.card_hover_glow_color }};
+    transform: translateY({{ block.settings.card_hover_translate_y }}px);
+  }
+
+  .ai-features-icon-wrapper-{{ ai_gen_id }} {
+    height: {{ block.settings.icon_size }}px;
+    width: {{ block.settings.icon_size }}px;
+    border-radius: {{ block.settings.icon_border_radius }}px;
+    background: {{ block.settings.icon_background_gradient }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: {{ block.settings.icon_margin_bottom }}px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-features-card-{{ ai_gen_id }}:hover .ai-features-icon-wrapper-{{ ai_gen_id }} {
+    transform: scale({{ block.settings.icon_hover_scale }});
+  }
+
+  .ai-features-icon-wrapper-{{ ai_gen_id }} img {
+    width: {{ block.settings.icon_image_size }}px;
+    height: {{ block.settings.icon_image_size }}px;
+    object-fit: contain;
+  }
+
+  .ai-features-icon-wrapper-{{ ai_gen_id }} svg {
+    width: {{ block.settings.icon_image_size }}px;
+    height: {{ block.settings.icon_image_size }}px;
+  }
+
+  .ai-features-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_font_size }}px;
+    font-weight: {{ block.settings.card_title_font_weight }};
+    color: {{ block.settings.card_title_color }};
+    margin: 0 0 {{ block.settings.card_title_margin_bottom }}px;
+  }
+
+  .ai-features-card-desc-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_desc_font_size }}px;
+    line-height: {{ block.settings.card_desc_line_height }};
+    color: {{ block.settings.card_desc_color }};
+    margin: 0;
+  }
+{% endstyle %}
+
+<ai-features-section-{{ ai_gen_id }} class="ai-features-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-features-container-{{ ai_gen_id }}">
+    {% if block.settings.show_header %}
+      <div class="ai-features-header-{{ ai_gen_id }}">
+        {% if block.settings.label != blank %}
+          <div class="ai-features-label-{{ ai_gen_id }}">{{ block.settings.label }}</div>
+        {% endif %}
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-features-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-features-grid-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign feature_enabled_key = 'feature_' | append: i | append: '_enabled'
+          assign feature_icon_key = 'feature_' | append: i | append: '_icon'
+          assign feature_title_key = 'feature_' | append: i | append: '_title'
+          assign feature_desc_key = 'feature_' | append: i | append: '_desc'
+
+          assign feature_enabled = block.settings[feature_enabled_key]
+          assign feature_icon = block.settings[feature_icon_key]
+          assign feature_title = block.settings[feature_title_key]
+          assign feature_desc = block.settings[feature_desc_key]
+        %}
+
+        {% if feature_enabled %}
+          <div class="ai-features-card-{{ ai_gen_id }}">
+            <div class="ai-features-icon-wrapper-{{ ai_gen_id }}">
+              {% if feature_icon != blank %}
+                <img
+                  src="{{ feature_icon | image_url: width: 200 }}"
+                  alt="{{ feature_title | escape }}"
+                  loading="lazy"
+                  width="200"
+                  height="200"
+                >
+              {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.icon_fallback_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              {% endif %}
+            </div>
+            <h3 class="ai-features-card-title-{{ ai_gen_id }}">{{ feature_title }}</h3>
+            <p class="ai-features-card-desc-{{ ai_gen_id }}">{{ feature_desc }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</ai-features-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AiFeaturesSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.initializeObserver();
+      }
+
+      initializeObserver() {
+        const cards = this.querySelectorAll('.ai-features-card-{{ ai_gen_id }}');
+        
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+              }
+            });
+          }, {
+            threshold: 0.1
+          });
+
+          cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+          });
+        }
+      }
+    }
+
+    customElements.define('ai-features-section-{{ ai_gen_id }}', AiFeaturesSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Features section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#262626"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "label": "Container max width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "label",
+      "label": "Label",
+      "default": "Features"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label font size",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Label font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "label_letter_spacing",
+      "label": "Label letter spacing",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.1,
+      "unit": "em",
+      "default": 0.2
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#1fa88e"
+    },
+    {
+      "type": "range",
+      "id": "label_margin_bottom",
+      "label": "Label margin bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built without compromise"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading font size (mobile)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "label": "Heading font size (desktop)",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "options": [
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "900"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "Heading line height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing",
+      "label": "Heading letter spacing",
+      "min": -0.1,
+      "max": 0.1,
+      "step": 0.1,
+      "unit": "em",
+      "default": -0.1
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "range",
+      "id": "header_max_width",
+      "label": "Header max width",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "header_margin_bottom",
+      "label": "Header margin bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#262626"
+    },
+    {
+      "type": "color",
+      "id": "card_border_hover_color",
+      "label": "Border hover color",
+      "default": "#1fa88e"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Background color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_hover_glow_size",
+      "label": "Hover glow size",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "card_hover_glow_color",
+      "label": "Hover glow color",
+      "default": "rgba(31, 168, 142, 0.3)"
+    },
+    {
+      "type": "range",
+      "id": "card_hover_translate_y",
+      "label": "Hover translate Y",
+      "min": -20,
+      "max": 0,
+      "step": 2,
+      "unit": "px",
+      "default": -4
+    },
+    {
+      "type": "header",
+      "content": "Icon style"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon wrapper size",
+      "min": 30,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "icon_image_size",
+      "label": "Icon image size",
+      "min": 15,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "icon_border_radius",
+      "label": "Icon border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "icon_background_gradient",
+      "label": "Icon background gradient",
+      "default": "linear-gradient(135deg, #1fa88e, #26d4b3)"
+    },
+    {
+      "type": "color",
+      "id": "icon_fallback_color",
+      "label": "Icon fallback color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "icon_margin_bottom",
+      "label": "Icon margin bottom",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_hover_scale",
+      "label": "Icon hover scale",
+      "min": 1,
+      "max": 1.5,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "range",
+      "id": "card_title_font_size",
+      "label": "Title font size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "card_title_font_weight",
+      "label": "Title font weight",
+      "options": [
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Title color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "range",
+      "id": "card_title_margin_bottom",
+      "label": "Title margin bottom",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_desc_font_size",
+      "label": "Description font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_desc_line_height",
+      "label": "Description line height",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.5
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Description color",
+      "default": "#a3a3a3"
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_enabled",
+      "label": "Enable feature 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_1_title",
+      "label": "Title",
+      "default": "Secure Fit"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_1_desc",
+      "label": "Description",
+      "default": "Precision-molded to grip your key perfectly with zero rattle."
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_enabled",
+      "label": "Enable feature 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_2_title",
+      "label": "Title",
+      "default": "Water Resistant"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_2_desc",
+      "label": "Description",
+      "default": "IPX5 rated. Weather, sweat, or spills — fully protected."
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_3_enabled",
+      "label": "Enable feature 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_3_title",
+      "label": "Title",
+      "default": "Scratch Proof"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_3_desc",
+      "label": "Description",
+      "default": "Aerospace-grade coating keeps it pristine, year after year."
+    },
+    {
+      "type": "header",
+      "content": "Feature 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_4_enabled",
+      "label": "Enable feature 4",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_4_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_4_title",
+      "label": "Title",
+      "default": "Universal Fit"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_4_desc",
+      "label": "Description",
+      "default": "Compatible with all major car brands and key models."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features section"
+    }
+  ]
+}
+{% endschema %}
